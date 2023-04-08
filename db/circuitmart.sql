@@ -2,6 +2,36 @@ create database circuitmart;
 show databases;
 use circuitmart;
 
+create table departments (
+    name varchar(50),
+    dept_id int PRIMARY KEY AUTO_INCREMENT,
+    num_employees int
+);
+
+create table customers (
+    cust_id int PRIMARY KEY AUTO_INCREMENT,
+    street varchar(50),
+    city varchar(50),
+    state varchar(50),
+    zip_code varchar(10),
+    first_name varchar(20),
+    last_name varchar(20),
+    email varchar(50),
+    dob date,
+    phone varchar(20)
+);
+
+create table orders (
+    order_status int,
+    quantity int,
+    order_date date,
+    order_id int PRIMARY KEY AUTO_INCREMENT,
+    cust_id int,
+    CONSTRAINT fk_dept1
+                       FOREIGN KEY (cust_id) REFERENCES customers (cust_id)
+                       ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
 create table employees (
     salary decimal(13, 2),
     ssn varchar(11),
@@ -20,32 +50,20 @@ create table employees (
     gender varchar(10),
     phone varchar(20),
     dept_id int not null,
-    CONSTRAINT fk_dept1
+    CONSTRAINT fk_dept2
                        FOREIGN KEY (dept_id) REFERENCES departments (dept_id)
                        ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-create table departments (
-    name varchar(50),
-    dept_id int PRIMARY KEY AUTO_INCREMENT,
-    num_employees int
-);
-
 create table projects (
     name varchar(50),
-    number int AUTO_INCREMENT,
+    number int,
     budget decimal(13, 2),
     dept_id int,
     PRIMARY KEY(name, number),
-    CONSTRAINT fk_dept2
+    CONSTRAINT fk_dept3
                       FOREIGN KEY (dept_id) REFERENCES departments (dept_id)
-                      ON UPDATE CASCADE ON DELETE RESTRICT,
-    CONSTRAINT fk_num1
-                       FOREIGN KEY (number) REFERENCES retailers (proj_num)
-                       ON UPDATE CASCADE ON DELETE RESTRICT,
-    CONSTRAINT fk_name1
-                       FOREIGN KEY (name) REFERENCES retailers (proj_name)
-                       ON UPDATE CASCADE ON DELETE RESTRICT
+                      ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 create table products (
@@ -69,26 +87,6 @@ create table products (
                        ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-create table orders (
-    order_status int,
-    quantity int,
-    order_date date,
-    order_id int PRIMARY KEY AUTO_INCREMENT
-);
-
-create table customers (
-    cust_id int PRIMARY KEY AUTO_INCREMENT,
-    street varchar(50),
-    city varchar(50),
-    state varchar(50),
-    zip_code varchar(10),
-    first_name varchar(20),
-    last_name varchar(20),
-    email varchar(50),
-    dob date,
-    phone varchar(20)
-);
-
 create table retailers (
     ret_id int PRIMARY KEY AUTO_INCREMENT,
     name varchar(50),
@@ -100,7 +98,10 @@ create table retailers (
     zip_code varchar(10),
     email varchar(50),
     proj_num int,
-    proj_name varchar(100)
+    proj_name varchar(50),
+    CONSTRAINT fk_proj1
+                       FOREIGN KEY (proj_name,proj_num) REFERENCES projects(name,number)
+                       ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 create table emp_project (
@@ -109,13 +110,13 @@ create table emp_project (
     proj_name varchar(100),
     start_date date,
     hour decimal(6, 2),
-    PRIMARY KEY(emp_id, proj_name, proj_name),
-    CONSTRAINT fk_proj_num
-                         FOREIGN KEY (proj_num) REFERENCES projects (number)
+    PRIMARY KEY(emp_id, proj_name, proj_num),
+    CONSTRAINT fk_proj2
+                         FOREIGN KEY (proj_name,proj_num) REFERENCES projects (name,number)
                          ON UPDATE CASCADE ON DELETE RESTRICT,
-    CONSTRAINT fk_proj_name
-                       FOREIGN KEY (proj_name) REFERENCES projects (name)
-                       ON UPDATE CASCADE ON DELETE RESTRICT
+    CONSTRAINT fk_emp_proj
+                         FOREIGN KEY (emp_id) REFERENCES employees (emp_id)
+                         ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 create table fulfilled (
@@ -168,5 +169,3 @@ create table promotions (
                        FOREIGN KEY (prod_id) REFERENCES products (prod_id)
                        ON UPDATE CASCADE ON DELETE RESTRICT
 );
-
-
