@@ -2,6 +2,7 @@ create database circuitmart;
 show databases;
 use circuitmart;
 
+-- TABLES --
 create table departments (
     name varchar(50),
     dept_id int PRIMARY KEY AUTO_INCREMENT,
@@ -160,7 +161,7 @@ create table promotions (
     proj_num int,
     proj_name varchar(100),
     prod_id int,
-    discount decimal(3, 2),
+    discount decimal(3, 1),
     promo_code varchar(50),
     start_date date,
     end_date date,
@@ -169,3 +170,45 @@ create table promotions (
                        FOREIGN KEY (prod_id) REFERENCES products (prod_id)
                        ON UPDATE CASCADE ON DELETE RESTRICT
 );
+
+
+-- INSERTS --
+insert into departments (name, dept_id, num_employees)
+values ('Administration', 1, 5);
+
+insert into customers (cust_id, street, city, state, zip_code, first_name, last_name, email, dob, phone)
+values (1, '100 Apple St', 'Boston', 'MA', '02120', 'John', 'Smith', 'jsmith1234@mail.com', '2003-01-01', '123-456-7890');
+
+insert into orders (order_status, quantity, order_date, cust_id)
+values (1, 1, '2023-04-07', 1);
+
+insert into employees (salary, ssn, emp_id, street, city, state, zip_code, join_date, start_date, dob,
+                       first_name, last_name, primary_email, secondary_email, gender, phone, dept_id)
+values (123456.78, '123-45-6789', 1, '100 Banana St', 'Boston', 'MA', 02120, '2020-01-01', '2020-01-01', '2000-01-01',
+        'Boss', 'Man', 'ceo@mail.com', 'bossman@mail.com', 'Male', '098-765-4321', 1);
+
+insert into projects (name, number, budget, dept_id)
+values ('Benchmark Scores', 1, 100000.00, 1);
+
+insert into products (date_listed, name, class, category, rating, reviews, price, page_views, description,
+                      brought_id, order_id)
+values ('2023-01-01', 'Intel i7-13700K', '16 Core', 'CPU', 4.56, 123, 400.00, 10000, 'The latest high-end Intel CPU',
+        1, 1);
+
+insert into retailers (name, rating, reviews, street, city, state, zip_code, email, proj_num, proj_name)
+values ('PC Part Sellers LLC', 3.45, 100, '1 Orange Dr', 'Cityville', 'NY', '12345', 'pps@pps.com', 1, 'Benchmark Scores');
+
+insert into emp_project (emp_id, proj_num, proj_name, start_date, hour)
+values (1, 1, 'Benchmark Scores', '2023-01-01', 100.00);
+
+insert into fulfilled (ret_id, order_id)
+values (1, 1);
+
+insert into offered_by (ret_id, product_id, stock)
+values (1, 1, 100);
+
+insert into order_products (order_id, product_id)
+values (1, 1);
+
+insert into promotions (proj_num, proj_name, prod_id, discount, promo_code, start_date, end_date)
+values (1, 'Benchmark Scores', 1, 20.0, 'QWERTYUIOP1234567890', '2023-01-01', '2023-12-31');
