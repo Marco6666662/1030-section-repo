@@ -122,7 +122,7 @@ create table emp_project (
                          ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-create table fulfilled (
+create table fulfillment (
     ret_id int,
     order_id int,
     PRIMARY KEY(ret_id, order_id),
@@ -134,7 +134,7 @@ create table fulfilled (
                        ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-create table offered_by (
+create table retailers_products (
     ret_id int,
     product_id int,
     stock int,
@@ -170,7 +170,10 @@ create table promotions (
     PRIMARY KEY(proj_num, proj_name, prod_id),
     CONSTRAINT fk_prod3
                        FOREIGN KEY (prod_id) REFERENCES products (prod_id)
-                       ON UPDATE CASCADE ON DELETE RESTRICT
+                       ON UPDATE CASCADE ON DELETE RESTRICT,
+    CONSTRAINT fk_proj3
+                         FOREIGN KEY (proj_name,proj_num) REFERENCES projects (name,number)
+                         ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 
