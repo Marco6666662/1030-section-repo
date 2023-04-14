@@ -1,4 +1,6 @@
 create database circuitmart;
+grant all privileges on circuitmart.* to 'webapp'@'%';
+flush privileges;
 show databases;
 use circuitmart;
 
