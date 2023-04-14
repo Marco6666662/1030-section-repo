@@ -216,11 +216,11 @@ insert into emp_project (emp_id, proj_num, proj_name, start_date, hour)
 values (1, 1, 'Benchmark Scores', '2023-01-01', 100.00),
        (2, 2, 'Project 2', '2023-01-01', 1.00);
 
-insert into fulfilled (ret_id, order_id)
+insert into fulfillment (ret_id, order_id)
 values (1, 1),
        (2, 2);
 
-insert into offered_by (ret_id, product_id, stock)
+insert into retailers_products (ret_id, product_id, stock)
 values (1, 1, 100),
        (2, 2, 0);
 
