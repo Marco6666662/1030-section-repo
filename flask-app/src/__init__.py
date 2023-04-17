@@ -30,15 +30,12 @@ def create_app():
         return "<h1>Welcome to the circuitmart app</h1>"
 
     # Import the various routes
-    from src.views import views
     from src.customers.customers import customers
     from src.retailers.retailers  import retailers
     from src.products.products import products
 
     # Register the routes that we just imported so they can be properly handled
-    app.register_blueprint(views,       url_prefix='/v')
     app.register_blueprint(customers,   url_prefix='/c')
     app.register_blueprint(retailers,    url_prefix='/r')
-    app.register_blueprint(products, url_prefix='/p')
 
     return app
