@@ -3,13 +3,13 @@ import json
 from src import db
 
 
-products = Blueprint('products', __name__)
+retailers = Blueprint('retailers', __name__)
 
 # Get all the products from the database
-@products.route('/products', methods=['GET'])
-def get_products():
+@retailers.route('/retailers', methods=['GET'])
+def get_retailers():
     cursor = db.get_db().cursor()
-    cursor.execute('select * from products')
+    cursor.execute('select * from retailers')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -21,10 +21,10 @@ def get_products():
     return the_response
 
 # Get customer by id from the DB
-@products.route('/products/<prod_id>', methods=['GET'])
-def get_productbyID(prod_id):
+@retailers.route('/retailers/<ret_id>', methods=['GET'])
+def get_retailerbyID(ret_id):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from products where prod_id = {0}'.format(prod_id))
+    cursor.execute('select * from retailers where ret_id = {0}'.format(ret_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
