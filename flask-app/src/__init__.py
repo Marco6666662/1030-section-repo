@@ -32,7 +32,6 @@ def create_app():
     # Import the various routes
     from src.customers.customers import customers
     from src.retailers.retailers  import retailers
-    from src.products.products import products
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(customers,   url_prefix='/c')
