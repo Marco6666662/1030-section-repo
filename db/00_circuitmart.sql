@@ -126,7 +126,7 @@ create table fulfillment (
 
 create table retailers_products (
     ret_id int,
-    product_id int,
+    prod_id int,
     stock int,
     PRIMARY KEY(ret_id, product_id),
     CONSTRAINT fk_ret2
@@ -139,7 +139,7 @@ create table retailers_products (
 
 create table order_products (
     order_id int,
-    product_id int,
+    prod_id int,
     quantity int,
     PRIMARY KEY(order_id, product_id),
     CONSTRAINT fk_order2

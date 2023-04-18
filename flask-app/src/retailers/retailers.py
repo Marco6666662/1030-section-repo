@@ -124,7 +124,7 @@ def update_order(order_id):
     return "Success"
 
 # persona story 6
-@retailers.route('/retailers/<retID>', methods=['PUT'])
+@retailers.route('/retailers/<ret_id>', methods=['PUT'])
 def update_retailer_address(ret_id):
     current_app.logger.info('Processing form data')
     req_data = request.get_json()
@@ -145,7 +145,7 @@ def update_retailer_address(ret_id):
     return "Success"
 
 # persona story 7
-@retailers.route('/retailers_products/<retID>/<prod_id>', methods=['PUT'])
+@retailers.route('/retailers_products/<ret_id>/<prod_id>', methods=['PUT'])
 def update_product_stock(ret_id, prod_id):
     current_app.logger.info('Processing form data')
     req_data = request.get_json()
