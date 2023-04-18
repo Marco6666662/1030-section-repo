@@ -67,7 +67,7 @@ def post_prod_id(date_listed, name, _class, category, price, description, brough
     return the_response
 
 # Update the price of a product
-@retailers.route('/products/<prod_id>', method=['UPDATE'])
+@retailers.route('/products/<prod_id>', method=['PUT'])
 def post_prod_id(prod_id, price):
     cursor = db.get_db().cursor()
     cursor.execute(f'update products set price = {price} where prod_id = {prod_id};')
