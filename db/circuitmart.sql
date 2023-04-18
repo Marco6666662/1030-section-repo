@@ -43,7 +43,6 @@ create table employees (
     state varchar(50),
     zip_code varchar(10),
     join_date date,
-    start_date date,
     dob date,
     first_name varchar(20),
     last_name varchar(20),
@@ -80,8 +79,12 @@ create table products (
     page_views int,
     description mediumtext,
     brought_id int,
+    order_id int,
     CONSTRAINT fk_brought
                        FOREIGN KEY (brought_id) REFERENCES products (prod_id)
+                       ON UPDATE CASCADE ON DELETE RESTRICT,
+    CONSTRAINT fk_order
+                       FOREIGN KEY (order_id) REFERENCES orders (order_id)
                        ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
@@ -171,59 +174,3 @@ create table promotions (
                          FOREIGN KEY (proj_name,proj_num) REFERENCES projects (name,number)
                          ON UPDATE CASCADE ON DELETE RESTRICT
 );
-
-
--- INSERTS --
-insert into departments (name, dept_id, num_employees)
-values ('Administration', 1, 5),
-       ('Marketing', 2, 10);
-
-insert into customers (cust_id, street, city, state, zip_code, first_name, last_name, email, dob, phone)
-values (1, '100 Apple St', 'Boston', 'MA', '02120', 'John', 'Smith', 'jsmith1234@mail.com', '2003-01-01', '123-456-7890'),
-       (2, '200 Apple St', 'Boston', 'MA', '02120', 'Jane', 'Smith', 'jsmith1235@mail.com', '2002-01-01', '123-456-7891');
-
-insert into orders (order_status, quantity, order_date, cust_id)
-values (1, 1, '2023-04-07', 1),
-       (2, 1, '2023-01-01', 2);
-
-insert into employees (salary, ssn, emp_id, street, city, state, zip_code, join_date, start_date, dob,
-                       first_name, last_name, primary_email, secondary_email, gender, phone, dept_id)
-values (123456.78, '123-45-6789', 1, '100 Banana St', 'Boston', 'MA', 02120, '2020-01-01', '2020-01-01', '2000-01-01',
-        'Boss', 'Man', 'ceo@mail.com', 'bossman@mail.com', 'Male', '098-765-4321', 1),
-    (50000.00, '987-65-4321', 2, '200 Banana St', 'Boston', 'MA', 02120, '2020-01-01', '2020-01-01', '2002-01-01',
-        'Marketing', 'Man', 'marketing1@mail.com', 'marketing1@mail.com', 'Male', '102-394-5867', 2);
-
-insert into projects (name, number, budget, dept_id)
-values ('Benchmark Scores', 1, 100000.00, 1),
-       ('Project 2', 2, 10.00, 2);
-
-insert into products (date_listed, name, class, category, rating, reviews, price, page_views, description,
-                      brought_id, order_id)
-values ('2023-01-01', 'Intel i7-13700K', '16 Core', 'CPU', 4.56, 123, 400.00, 10000, 'The latest high-end Intel CPU',
-        1, 1),
-    ('2023-01-01', 'RTX 4090', 'Nvidia GPU', 'GPU', 1.23, 10, 2000.00, 100000, 'The latest high-end Nvidia GPU',
-        2, 2);
-
-insert into retailers (name, rating, reviews, street, city, state, zip_code, email, proj_num, proj_name)
-values ('PC Part Sellers LLC', 3.45, 100, '1 Orange Dr', 'Cityville', 'NY', '12345', 'pps@pps.com', 1, 'Benchmark Scores'),
-       ('Bruh LLC', 5.00, 99999, '1 Bruh St', 'Bruhtown', 'BR', '99999', 'bruh@bruh.com', 2, 'Project 2');
-
-insert into emp_project (emp_id, proj_num, proj_name, start_date, hour)
-values (1, 1, 'Benchmark Scores', '2023-01-01', 100.00),
-       (2, 2, 'Project 2', '2023-01-01', 1.00);
-
-insert into fulfillment (ret_id, order_id)
-values (1, 1),
-       (2, 2);
-
-insert into retailers_products (ret_id, product_id, stock)
-values (1, 1, 100),
-       (2, 2, 0);
-
-insert into order_products (order_id, product_id)
-values (1, 1),
-       (2, 2);
-
-insert into promotions (proj_num, proj_name, prod_id, discount, promo_code, start_date, end_date)
-values (1, 'Benchmark Scores', 1, 20.0, 'QWERTYUIOP1234567890', '2023-01-01', '2023-12-31'),
-       (2, 'Project 2', 2, 99.9, 'ZXCVBNM0987654321', '2023-01-01', '2023-12-31');=
