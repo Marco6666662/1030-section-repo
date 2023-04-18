@@ -80,12 +80,8 @@ create table products (
     page_views int,
     description mediumtext,
     brought_id int,
-    order_id int,
     CONSTRAINT fk_brought
                        FOREIGN KEY (brought_id) REFERENCES products (prod_id)
-                       ON UPDATE CASCADE ON DELETE RESTRICT,
-    CONSTRAINT fk_order
-                       FOREIGN KEY (order_id) REFERENCES orders (order_id)
                        ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
