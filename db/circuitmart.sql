@@ -48,7 +48,7 @@ create table employees (
     last_name varchar(20),
     primary_email varchar(50),
     secondary_email varchar(50),
-    gender varchar(10),
+    gender varchar(20),
     phone varchar(20),
     dept_id int not null,
     CONSTRAINT fk_dept2
@@ -77,15 +77,7 @@ create table products (
     reviews int,
     price decimal(13, 2),
     page_views int,
-    description mediumtext,
-    brought_id int,
-    order_id int,
-    CONSTRAINT fk_brought
-                       FOREIGN KEY (brought_id) REFERENCES products (prod_id)
-                       ON UPDATE CASCADE ON DELETE RESTRICT,
-    CONSTRAINT fk_order
-                       FOREIGN KEY (order_id) REFERENCES orders (order_id)
-                       ON UPDATE CASCADE ON DELETE RESTRICT
+    description mediumtext
 );
 
 create table retailers (
