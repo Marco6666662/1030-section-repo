@@ -67,7 +67,7 @@ def post_prod_id(date_listed, name, _class, category, price, description, brough
     return the_response
 
 # Update the price of a product
-@retailers.route('/products/<prod_id>', method=['POST'])
+@retailers.route('/products/<prod_id>', method=['UPDATE'])
 def post_prod_id(prod_id, price):
     cursor = db.get_db().cursor()
     cursor.execute(f'update products set price = {price} where prod_id = {prod_id};')
@@ -82,7 +82,7 @@ def post_prod_id(prod_id, price):
     return the_response
 
 # Delete a product that is discontinued
-@retailers.route('/products/<prod_id>', method=['POST'])
+@retailers.route('/products/<prod_id>', method=['DELETE'])
 def post_prod_id(prod_id):
     cursor = db.get_db().cursor()
     cursor.execute(f'delete from products where prod_id = {prod_id};')
