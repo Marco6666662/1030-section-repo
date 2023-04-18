@@ -100,7 +100,7 @@ def get_order_products():
 @retailers.route('/order_products/<prod_id>', methods=['GET'])
 def get_product_orders(prod_id):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from order_products where prod_id = {0}').format(prod_id)
+    cursor.execute(f'select * from order_products where prod_id = {prod_id}')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -120,8 +120,7 @@ def update_order(order_id):
     
     order_status = req_data['order_status']
     
-    update_stmt = 'UPDATE orders SET order_status =' 
-    update_stmt += order_status + 'WHERE prod_id =' + order_id
+    update_stmt = f'UPDATE orders SET order_status = {order_status} WHERE order_id = {order_id};'
     
     current_app.logger.info(update_stmt)
     
@@ -137,14 +136,12 @@ def update_retailer_address(ret_id):
     req_data = request.get_json()
     current_app.logger.info(req_data)
     
-    ret_state = req_data['state']
-    ret_city = req_data['city']
-    ret_street = req_data['street']
-    ret_zip_code = req_data['zip_code']
+    state = req_data['state']
+    city = req_data['city']
+    street = req_data['street']
+    zip_code = req_data['zip_code']
     
-    update_stmt = 'UPDATE retailers SET state =' + ret_state + ', city ='
-    update_stmt += ret_city + ',street =' + ret_street + 'zip_code ='
-    update_stmt += ret_zip_code + 'WHERE retID =' + str(ret_id)
+    update_stmt = f'UPDATE retailers SET state = {state}, city = {city}, street = {street}, zip_code = {zip_code} WHERE ret_id = {ret_id};'
     
     current_app.logger.info(update_stmt)
     
@@ -162,8 +159,7 @@ def update_product_stock(ret_id, prod_id):
     
     stock = req_data['stock']
     
-    update_stmt = 'UPDATE retailers_products SET stock =' + stock
-    update_stmt += 'WHERE retID =' + str(ret_id) + 'AND prod_id =' + str(prod_id)
+    update_stmt = f'UPDATE retailers_products SET stock = {stock} WHERE ret_id = {ret_id} AND prod_id = {prod_id};'
     
     current_app.logger.info(update_stmt)
     
