@@ -26,7 +26,6 @@ create table customers (
 
 create table orders (
     order_status int,
-    quantity int,
     order_date date,
     order_id int PRIMARY KEY AUTO_INCREMENT,
     cust_id int,
@@ -150,6 +149,7 @@ create table retailers_products (
 create table order_products (
     order_id int,
     product_id int,
+    quantity int,
     PRIMARY KEY(order_id, product_id),
     CONSTRAINT fk_order2
                        FOREIGN KEY (order_id) REFERENCES orders (order_id)
