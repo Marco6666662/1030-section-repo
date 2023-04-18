@@ -1,39 +1,9 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from src import db
 
 
 retailers = Blueprint('retailers', __name__)
-
-# Get all the products from the database
-@retailers.route('/retailers', methods=['GET'])
-def get_retailers():
-    cursor = db.get_db().cursor()
-    cursor.execute('select * from retailers')
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(jsonify(json_data))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-# Get customer by id from the DB
-@retailers.route('/retailers/<ret_id>', methods=['GET'])
-def get_retailerbyID(ret_id):
-    cursor = db.get_db().cursor()
-    cursor.execute('select * from retailers where ret_id = {0}'.format(ret_id))
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(jsonify(json_data))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
 
 # Return a list of all products stock offered by each retailer with their id
 @retailers.route('/retailers_products/', methods=['GET'])
@@ -110,3 +80,94 @@ def get_productbyID(prod_id):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+# persona story 4
+@retailers.route('/order_products', methods=['GET'])
+def get_order_products():
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from order_products')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# persona story 4
+@retailers.route('/order_products/<prod_id>', methods=['GET'])
+def get_product_orders(prod_id):
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from order_products where prod_id = {0}').format(prod_id)
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# persona story 5
+@retailers.route('/orders/<order_id>', methods=['PUT'])
+def update_order(order_id):
+    current_app.logger.info('Processing form data')
+    req_data = request.get_json()
+    current_app.logger.info(req_data)
+    
+    order_status = req_data['order_status']
+    
+    update_stmt = 'UPDATE orders SET order_status =' 
+    update_stmt += order_status + 'WHERE prod_id =' + order_id
+    
+    current_app.logger.info(update_stmt)
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(update_stmt)
+    db.get_db().commit()
+    return "Success"
+
+# persona story 6
+@retailers.route('/retailers/<retID>', methods=['PUT'])
+def update_retailer_address(ret_id):
+    current_app.logger.info('Processing form data')
+    req_data = request.get_json()
+    current_app.logger.info(req_data)
+    
+    ret_state = req_data['state']
+    ret_city = req_data['city']
+    ret_street = req_data['street']
+    ret_zip_code = req_data['zip_code']
+    
+    update_stmt = 'UPDATE retailers SET state =' + ret_state + ', city ='
+    update_stmt += ret_city + ',street =' + ret_street + 'zip_code ='
+    update_stmt += ret_zip_code + 'WHERE retID =' + str(ret_id)
+    
+    current_app.logger.info(update_stmt)
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(update_stmt)
+    db.get_db().commit()
+    return "Success"
+
+# persona story 7
+@retailers.route('/retailers_products/<retID>/<prod_id>', methods=['PUT'])
+def update_product_stock(ret_id, prod_id):
+    current_app.logger.info('Processing form data')
+    req_data = request.get_json()
+    current_app.logger.info(req_data)
+    
+    stock = req_data['stock']
+    
+    update_stmt = 'UPDATE retailers_products SET stock =' + stock
+    update_stmt += 'WHERE retID =' + str(ret_id) + 'AND prod_id =' + str(prod_id)
+    
+    current_app.logger.info(update_stmt)
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(update_stmt)
+    db.get_db().commit()
+    return "Success"
