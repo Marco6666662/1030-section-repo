@@ -1934,7 +1934,7 @@ INSERT INTO orders(order_id, cust_id, order_status, order_date) VALUES(1, 777, 1
 ,(199, 897, 2, '2018-07-15')
 ,(200, 436, 1, '2021-05-27');
 
-INSERT INTO order_products(order_id, product_id, quantity) VALUES(109, 75, 3)
+INSERT INTO order_products(order_id, prod_id, quantity) VALUES(109, 75, 3)
 ,(45, 184, 8)
 ,(124, 39, 2)
 ,(158, 122, 4)
@@ -3145,7 +3145,7 @@ INSERT INTO fulfillment(ret_id, order_id) VALUES(4, 1)
 ,(6, 199)
 ,(8, 200);
 
-INSERT INTO retailers_products(ret_id, product_id, stock) VALUES(1, 1, 19)
+INSERT INTO retailers_products(ret_id, prod_id, stock) VALUES(1, 1, 19)
 ,(2, 2, 17)
 ,(4, 3, 20)
 ,(3, 4, 15)

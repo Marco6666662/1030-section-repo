@@ -128,12 +128,12 @@ create table retailers_products (
     ret_id int,
     prod_id int,
     stock int,
-    PRIMARY KEY(ret_id, product_id),
+    PRIMARY KEY(ret_id, prod_id),
     CONSTRAINT fk_ret2
                        FOREIGN KEY (ret_id) REFERENCES retailers (ret_id)
                        ON UPDATE CASCADE ON DELETE RESTRICT,
     CONSTRAINT fk_prod2
-                       FOREIGN KEY (product_id) REFERENCES products (prod_id)
+                       FOREIGN KEY (prod_id) REFERENCES products (prod_id)
                        ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
@@ -141,12 +141,12 @@ create table order_products (
     order_id int,
     prod_id int,
     quantity int,
-    PRIMARY KEY(order_id, product_id),
+    PRIMARY KEY(order_id, prod_id),
     CONSTRAINT fk_order2
                        FOREIGN KEY (order_id) REFERENCES orders (order_id)
                        ON UPDATE CASCADE ON DELETE RESTRICT,
     CONSTRAINT fk_prod4
-                       FOREIGN KEY (product_id) REFERENCES products (prod_id)
+                       FOREIGN KEY (prod_id) REFERENCES products (prod_id)
                        ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
