@@ -164,4 +164,18 @@
     },
     "tests": []
   }
+  {
+    "_id": "b2339cb3-332c-4911-b8e7-8e4a1e9367af",
+    "colId": "e1511757-c5dd-49e0-9804-b01f2a4f54dd",
+    "containerId": "",
+    "name": "get_retailer_info",
+    "url": "localhost:8001/r/retailers/5",
+    "method": "GET",
+    "sortNum": 70000,
+    "created": "2023-04-19T12:52:39.001Z",
+    "modified": "2023-04-19T12:54:34.305Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
 ]
