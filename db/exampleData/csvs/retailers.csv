@@ -1,9 +1,0 @@
-ret_id,proj_num,proj_name,name,rating,reviews,street,city,state,zip_code,email
-1,5,Procurement and Supplier Management Phase2,Electron Emporium,2.7,59,07292 Surrey Crossing,Madison,Wisconsin,53716,contact@electronemporium.com
-2,5,Procurement and Supplier Management Phase1,Mega Microelectronics,3.5,31,9 Dwight Plaza,New York City,New York,10019,hello@megamicroelectronics.com
-3,5,Procurement and Supplier Management Phase3,Future Frontier,1.6,167,038 Blaine Circle,Fayetteville,North Carolina,28314,info@futurefrontier.com
-4,5,Procurement and Supplier Management Phase2,Micro Magic,2.2,7,40 Corscot Place,Sacramento,California,94263,support@micromagic.com
-5,5,Procurement and Supplier Management Phase3,Spark Plug Electronics,4.4,60,26385 Namekagon Road,Roanoke,Virginia,24020,info@sparkplugelectronics.com
-6,5,Procurement and Supplier Management Phase3,Electric Empire,3.0,195,5670 Heffernan Hill,Anchorage,Alaska,99507,hello@electricempire.com
-7,5,Procurement and Supplier Management Phase2,Tech Haven,4.0,88,985 Union Terrace,Jackson,Mississippi,39204,Tech Haven
-8,5,Procurement and Supplier Management Phase3,TechLinx,1.1,37,95 Quincy Trail,Fort Wayne,Indiana,46814,info@techlinx.com
