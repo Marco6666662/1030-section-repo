@@ -6,4 +6,11 @@
     "sortNum": 10000,
     "folders": []
   }
+  {
+    "_id": "e1511757-c5dd-49e0-9804-b01f2a4f54dd",
+    "colName": "Retailers (4-7)",
+    "created": "2023-04-18T21:13:09.511Z",
+    "sortNum": 20000,
+    "folders": []
+  }
 ]
