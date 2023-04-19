@@ -70,8 +70,8 @@ create table projects (
 create table products (
     prod_id int PRIMARY KEY AUTO_INCREMENT,
     date_listed date,
-    name varchar(100),
-    class varchar(50),
+    prod_name varchar(100),
+    prod_class varchar(50),
     category varchar(50),
     rating decimal(3, 2),
     reviews int,

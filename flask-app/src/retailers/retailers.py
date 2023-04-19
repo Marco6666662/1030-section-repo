@@ -27,14 +27,14 @@ def post_prod_id(prod_id):
     current_app.logger.info(req_data)
 
     date_listed = req_data['date_listed']
-    name = req_data['name']
-    _class = req_data['class']
+    name = req_data['prod_name']
+    _class = req_data['prod_class']
     category = req_data['category']
     price = req_data['price']
     description = req_data['description']
 
     cursor = db.get_db().cursor()
-    cursor.execute(f'insert into products (date_listed, name, class, category, price, description, prod_id) \
+    cursor.execute(f'insert into products (date_listed, prod_name, prod_class, category, price, description, prod_id) \
                    values ({date_listed}, {name}, {_class}, {category}, {price}, {description}, {prod_id});')
     db.get_db().commit()
     return 'Success'

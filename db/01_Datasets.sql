@@ -1532,7 +1532,7 @@ INSERT INTO emp_project(emp_id, proj_num, proj_name, start_date, hour) VALUES(1,
 ,(234, 13, 'Customer Experience Analysis', '2020-01-08', 5280)
 ,(235, 11, 'Contract Review and Compliance', '2022-04-11', 1762.5);
 
-INSERT INTO products(prod_id, date_listed, name, class, category, price, page_views, description) VALUES(1, '2016-10-15', 'LogicLane Desktop Computer', 'Desktop Computer', 'Prebuilt', 2608, 1771, 'This is the best Desktop Computer you will find.')
+INSERT INTO products(prod_id, date_listed, prod_name, prod_class, category, price, page_views, description) VALUES(1, '2016-10-15', 'LogicLane Desktop Computer', 'Desktop Computer', 'Prebuilt', 2608, 1771, 'This is the best Desktop Computer you will find.')
 ,(2, '2019-04-05', 'DigitalDreams Charger', 'Charger', 'Accessories', 83, 2610, 'There is no Charger more priceworthy.')
 ,(3, '2021-03-13', 'TechTerritory Graphics Card', 'Graphics Card', 'Computer Parts', 950, 9226, 'This is the best Graphics Card you will find.')
 ,(4, '2015-04-26', 'CyberCorner Charger', 'Charger', 'Accessories', 45, 6153, 'This is the Charger for you.')
