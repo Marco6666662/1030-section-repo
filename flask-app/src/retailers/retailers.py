@@ -57,6 +57,7 @@ def update_prod_id(prod_id):
 def delete_prod_id(prod_id):
     cursor = db.get_db().cursor()
     cursor.execute(f'delete from products where prod_id = {prod_id};')
+    db.get_db().commit()
     
     return 'Success'
 
