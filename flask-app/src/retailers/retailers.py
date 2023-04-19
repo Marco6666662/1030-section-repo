@@ -124,25 +124,38 @@ def update_order(order_id):
     return "Success"
 
 # persona story 6
-@retailers.route('/retailers/<ret_id>', methods=['PUT'])
-def update_retailer_address(ret_id):
-    current_app.logger.info('Processing form data')
-    req_data = request.get_json()
-    current_app.logger.info(req_data)
-    
-    state = req_data['state']
-    city = req_data['city']
-    street = req_data['street']
-    zip_code = req_data['zip_code']
-    
-    update_stmt = f'UPDATE retailers SET state = "{state}", city = "{city}", street = "{street}", zip_code = "{zip_code}" WHERE ret_id = {ret_id};'
-    
-    current_app.logger.info(update_stmt)
-    
-    cursor = db.get_db().cursor()
-    cursor.execute(update_stmt)
-    db.get_db().commit()
-    return "Success"
+@retailers.route('/retailers/<ret_id>', methods=['GET','PUT'])
+def retailer_info(ret_id):
+    if request.method == 'GET':
+        cursor = db.get_db().cursor()
+        cursor.execute(f'select * from retailers where ret_id = {ret_id}')
+        row_headers = [x[0] for x in cursor.description]
+        json_data = []
+        theData = cursor.fetchall()
+        for row in theData:
+            json_data.append(dict(zip(row_headers, row)))
+        the_response = make_response(jsonify(json_data))
+        the_response.status_code = 200
+        the_response.mimetype = 'application/json'
+        return the_response
+    else:
+        current_app.logger.info('Processing form data')
+        req_data = request.json
+        current_app.logger.info(req_data)
+        
+        state = req_data['state']
+        city = req_data['city']
+        street = req_data['street']
+        zip_code = req_data['zip_code']
+        
+        update_stmt = f'UPDATE retailers SET state = "{state}", city = "{city}", street = "{street}", zip_code = "{zip_code}" WHERE ret_id = {ret_id};'
+        
+        current_app.logger.info(update_stmt)
+        
+        cursor = db.get_db().cursor()
+        cursor.execute(update_stmt)
+        db.get_db().commit()
+        return "Success"
 
 # persona story 7
 @retailers.route('/retailers_products/<ret_id>/<prod_id>', methods=['PUT'])
