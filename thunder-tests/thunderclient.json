@@ -79,4 +79,89 @@
     "params": [],
     "tests": []
   }
+    {
+    "_id": "aa0aa54b-24f4-4c5b-a4b3-252cd44d13f6",
+    "colId": "e1511757-c5dd-49e0-9804-b01f2a4f54dd",
+    "containerId": "",
+    "name": "get_order_product",
+    "url": "localhost:8001/r/order_products",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-04-18T21:13:35.770Z",
+    "modified": "2023-04-18T21:14:17.177Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "aa22fe86-3413-4cbb-9bbe-bf330400c36c",
+    "colId": "e1511757-c5dd-49e0-9804-b01f2a4f54dd",
+    "containerId": "",
+    "name": "get_product_orders",
+    "url": "localhost:8001/r/order_products/2",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-04-18T21:15:06.260Z",
+    "modified": "2023-04-18T21:15:44.032Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "d9bd7ab8-7ec7-4cd5-96cf-0ee15cae2024",
+    "colId": "e1511757-c5dd-49e0-9804-b01f2a4f54dd",
+    "containerId": "",
+    "name": "update_order",
+    "url": "localhost:8001/r/orders/11",
+    "method": "PUT",
+    "sortNum": 30000,
+    "created": "2023-04-18T21:16:08.099Z",
+    "modified": "2023-04-18T21:20:36.565Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"order_status\": 0\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "948929a1-3c4e-46e0-8df4-2c542bf4ac95",
+    "colId": "e1511757-c5dd-49e0-9804-b01f2a4f54dd",
+    "containerId": "",
+    "name": "update_retailer_address",
+    "url": "localhost:8001/r/retailers/5",
+    "method": "PUT",
+    "sortNum": 50000,
+    "created": "2023-04-18T21:21:50.176Z",
+    "modified": "2023-04-18T21:23:02.473Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\r  \"state\": \"'MA'\",\r  \"city\": \"'Boston'\",\r  \"street\": \"'Huntington'\",\r  \"zip_code\": \"'02120'\"\r}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "73b41db9-8556-48e9-97db-28429df0ac5f",
+    "colId": "e1511757-c5dd-49e0-9804-b01f2a4f54dd",
+    "containerId": "",
+    "name": "update_product_stock",
+    "url": "localhost:8001/r/retailers_products/3/5",
+    "method": "PUT",
+    "sortNum": 60000,
+    "created": "2023-04-19T04:40:11.296Z",
+    "modified": "2023-04-19T04:41:21.529Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"stock\": 20\n}",
+      "form": []
+    },
+    "tests": []
+  }
 ]
