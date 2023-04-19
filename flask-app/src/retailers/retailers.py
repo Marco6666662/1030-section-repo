@@ -135,7 +135,7 @@ def update_retailer_address(ret_id):
     street = req_data['street']
     zip_code = req_data['zip_code']
     
-    update_stmt = f'UPDATE retailers SET state = {state}, city = {city}, street = {street}, zip_code = {zip_code} WHERE ret_id = {ret_id};'
+    update_stmt = f'UPDATE retailers SET state = "{state}", city = "{city}", street = "{street}", zip_code = "{zip_code}" WHERE ret_id = {ret_id};'
     
     current_app.logger.info(update_stmt)
     
