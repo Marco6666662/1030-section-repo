@@ -34,7 +34,7 @@ def post_prod_id(prod_id):
     description = req_data['description']
 
     cursor = db.get_db().cursor()
-    cursor.execute(f'insert into products (date_listed, prod_name, prod_class, category, price, description, prod_id) \
+    cursor.execute(f'insert into products (date_listed, name, class, category, price, description, prod_id) \
                    values ("{date_listed}", "{name}", "{_class}", "{category}", {price}, "{description}", {prod_id});')
     db.get_db().commit()
     return 'Success'
