@@ -13,4 +13,25 @@
     "sortNum": 20000,
     "folders": []
   }
+  {
+    "_id": "c7d2b9f0-d268-4ece-ae0b-2da4748f53be",
+    "colName": "Customer (1-3)",
+    "created": "2023-04-20T15:24:28.579Z",
+    "sortNum": 20000,
+    "folders": []
+  },
+  {
+    "_id": "64579900-d348-4486-a9f9-76ce5a391214",
+    "colName": "Customer (4-7)",
+    "created": "2023-04-20T15:24:44.523Z",
+    "sortNum": 30000,
+    "folders": []
+  },
+  {
+    "_id": "51a459b6-0c7d-49cb-98aa-67e7ddd32dda",
+    "colName": "Customer (8-9)",
+    "created": "2023-04-20T15:28:28.771Z",
+    "sortNum": 40000,
+    "folders": []
+  }
 ]
