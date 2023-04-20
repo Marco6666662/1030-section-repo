@@ -27,7 +27,7 @@ def get_customerbyID(cust_id):
 @customers.route('/products', methods=['GET'])
 def get_products():
     cursor = db.get_db().cursor()
-    cursor.execute('select prod_id, name, rating, price from products')
+    cursor.execute('select * from products')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
