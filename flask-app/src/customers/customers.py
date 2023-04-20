@@ -151,10 +151,10 @@ def delete_customer(cust_id):
 
 # Get a order of a specific customer from the DB
 # John -6
-@customers.route('/orders/<cust_id>/<order_id>', methods=['GET'])
-def get_cust_order(cust_id, order_id):
+@customers.route('/orders/<cust_id>', methods=['GET'])
+def get_cust_order(cust_id):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from orders where cust_id = {0} and order_id = {1}'.format(cust_id, order_id))
+    cursor.execute('select * from orders where cust_id = {0}'.format(cust_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -282,7 +282,7 @@ def get_promotion(proj_num, proj_name, prod_id):
 @customers.route('/order_products/<order_id>', methods=['GET'])
 def get_order_prods(order_id):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from order_products op JOIN products p on op.product_id = p.prod_id where op.order_id = {0}'.format(order_id))
+    cursor.execute('select * from order_products op JOIN products p on op.prod_id = p.prod_id where op.order_id = {0}'.format(order_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
