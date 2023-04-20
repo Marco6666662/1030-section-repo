@@ -93,7 +93,7 @@ def add_new_customer():
     phone = the_data['phone']
 
     # Parse the dob string into a datetime object
-    dob = datetime.strptime('Wed, 01 Jan 2003 00:00:00 GMT', '%a, %d %b %Y %H:%M:%S %Z')
+    dob = datetime.strptime(dob, '%a, %d %b %Y %H:%M:%S %Z')
 
     # Convert the datetime object into a string in the desired format
     dob = dob.strftime('%Y-%m-%d')
@@ -149,10 +149,10 @@ def delete_customer(cust_id):
 
     return "successfully delete!"
 
-# Get a order of a specific customer from the DB
+# Get all order of a specific customer from the DB
 # John -6
 @customers.route('/orders/<cust_id>', methods=['GET'])
-def get_cust_order(cust_id):
+def get_cust_orders(cust_id):
     cursor = db.get_db().cursor()
     cursor.execute('select * from orders where cust_id = {0}'.format(cust_id))
     row_headers = [x[0] for x in cursor.description]
@@ -219,31 +219,6 @@ def update_retailer(ret_id):
 
     return "successfully update retailer info!"
 
-# Get products that offered by retailer from the database
-# John - 4
-@customers.route('/retailer_product_search', methods=['GET'])
-def get_retailers_prod():
-    cursor = db.get_db().cursor()
-    prod_id = request.args.get('prod_id')
-    ret_id = request.args.get('ret_id')
-    if prod_id and ret_id:
-        cursor.execute('SELECT * FROM retailers_products WHERE prod_id = {0} AND ret_id = {1}'.format(prod_id, ret_id))
-    elif prod_id:
-        cursor.execute('SELECT * FROM retailers_products WHERE prod_id = {0}'.format(prod_id))
-    elif ret_id:
-        cursor.execute('SELECT * FROM retailers_products WHERE ret_id = {0}'.format(ret_id))
-    else:
-        cursor.execute('SELECT * FROM retailers_products')
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(jsonify(json_data))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
 # Get all promotion from the database
 # John - 2
 @customers.route('/promotion', methods=['GET'])
@@ -282,7 +257,7 @@ def get_promotion(proj_num, proj_name, prod_id):
 @customers.route('/order_products/<order_id>', methods=['GET'])
 def get_order_prods(order_id):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from order_products op JOIN products p on op.prod_id = p.prod_id where op.order_id = {0}'.format(order_id))
+    cursor.execute('select * from order_products op JOIN products p on op.product_id = p.prod_id where op.order_id = {0}'.format(order_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -292,3 +267,4 @@ def get_order_prods(order_id):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
